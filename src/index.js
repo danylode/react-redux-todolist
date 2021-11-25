@@ -10,7 +10,6 @@ import Tasks from './Components/Tasks/Tasks'
 
 ReactDOM.render(
   <React.StrictMode>
-    <TodoListSidebar />
     <Router>
       <Routes>
         <Route path="/" element={<EmptyComponent />} >

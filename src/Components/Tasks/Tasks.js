@@ -7,8 +7,6 @@ export default function Tasks() {
     let [tasks, setTasks] = useState([]);
     let params = useParams();
 
-
-    console.log(params.id);
     let showing = (event) => {
         document.querySelectorAll('.task').forEach((x) => {
             x.classList.toggle('nonvisible', !event.target.checked && x.getElementsByClassName('task-checkbox')[0].checked);
