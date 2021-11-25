@@ -1,15 +1,23 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react';
+import { useParams } from 'react-router';
+import Task from './Task';
+import serverMethods from '../../serverMethods';
 
-import Task from './Task'
+export default function Tasks() {
+    let [tasks, setTasks] = useState([]);
+    let params = useParams();
 
-export default function Tasks(props) {
-    let tasks = props.tasks.filter((task) => task.taskListId === props.listId);
 
+    console.log(params.id);
     let showing = (event) => {
         document.querySelectorAll('.task').forEach((x) => {
             x.classList.toggle('nonvisible', !event.target.checked && x.getElementsByClassName('task-checkbox')[0].checked);
         });
     }
+
+    useEffect(() => {
+        serverMethods.getTaskListById(params.id).then((data) => setTasks(data));
+    },[params.id]);
 
     return (
         <div id="content">
@@ -17,7 +25,7 @@ export default function Tasks(props) {
                 <input type="checkbox" onChange={showing} defaultChecked/>
                 <label>Show all</label>
             </div>
-            {tasks.map((task) => <Task key={task.taskId} task={task} deleteHandler={props.deleteHandler} changeHandler={props.changeHandler} />)}
+            {tasks.map((task) => <Task key={task.taskId} task={task}/>)}
         </div>
     )
 }

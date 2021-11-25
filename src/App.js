@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 
 import TodoListSidebar from './Components/TodoListSidebar';
 import Tasks from './Components/Tasks/Tasks';
+import EmptyComponent from './Components/EmptyComponent';
 import CreateTaskForm from './Components/Tasks/CreateTaskForm';
 import serverMethods from './serverMethods';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   let [todoLists, setTodoLists] = useState([]);
@@ -43,14 +45,7 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <TodoListSidebar lists={todoLists} clickHandler={changeList} />
-      <div id="tasks">
-        <Tasks tasks={allTasks} listId={currentListId} deleteHandler={deleteTask} changeHandler={patchDoneState} />
-        <CreateTaskForm onSubmit={addTask} listId={currentListId} />
-      </div>
-
-    </div>
+    <div></div>
   );
 }
 

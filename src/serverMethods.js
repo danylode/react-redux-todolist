@@ -1,11 +1,17 @@
 const corePath = 'http://localhost:5000/api/';
 const getLists = corePath + 'lists';
+const getListById = corePath + 'lists';
 const getAllTasksEndpoint = corePath + 'tasks/all';
 const postTaskEndpoint = corePath + 'tasks?listId=';
 const deleteTaskEndpoint = corePath + 'tasks/';
 const patchTaskEndpoint = corePath + 'tasks/'
 
 export default {
+  getTaskListById: (listId) => {
+    return fetch(getListById + `/${listId}/tasks?all=true`, {
+      method: 'GET'
+    }).then(request => request.json())
+  },
   getListsMethod: () => {
     return fetch(getLists, {
       method: 'GET'

@@ -6,12 +6,12 @@ export default function Task(props) {
 
     //Events
     let onDelete = () => {
-        props.deleteHandler(task.taskId);
+        //props.deleteHandler(task.taskId);
     }
 
     let onDoneChange = (event) => {
         task.taskDone = event.target.checked;
-        props.changeHandler(task);
+        //props.changeHandler(task);
     }
 
     return (

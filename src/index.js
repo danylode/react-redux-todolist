@@ -3,10 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import TodoListSidebar from './Components/TodoListSidebar'
+import EmptyComponent from './Components/EmptyComponent'
+import Tasks from './Components/Tasks/Tasks'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TodoListSidebar />
+    <Router>
+      <Routes>
+        <Route path="/" element={<EmptyComponent />} >
+          <Route path='todo-task/:id' element={<Tasks />}/>
+        </Route>
+      </Routes>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
