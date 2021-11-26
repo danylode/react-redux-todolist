@@ -3,19 +3,18 @@ import classNames from 'classnames';
 
 export default function Task(props) {
     let task = props.task;
-
     //Events
     let onDelete = () => {
-        //props.deleteHandler(task.taskId);
+        props.deleteHandler(task.taskId);
     }
 
     let onDoneChange = (event) => {
         task.taskDone = event.target.checked;
-        //props.changeHandler(task);
+        props.changeHandler(task);
     }
 
     return (
-        <div className="task">
+        <div className={classNames("task", {"nonvisible": props.nonVisible && task.taskDone})}>
             <div className="task-status">
                 <h1 className={classNames("task-name", {"task-done": task.taskDone})}>{task.taskName}</h1>
                 <input className="task-checkbox" type="checkbox" defaultChecked={task.taskDone} onChange={onDoneChange}/>

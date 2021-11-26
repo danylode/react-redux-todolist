@@ -4,10 +4,13 @@ body {
 }
 
 #root {
-    display: flex;
     justify-content: center;
     min-height: 100%;
     flex-basis: 75%;
+}
+
+li {
+    list-style: none;
 }
 
 

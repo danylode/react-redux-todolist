@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-basis: 50%;
+    flex-basis: 75%;
     margin-left: 10px;
 }
 
@@ -52,7 +52,7 @@
 /* Sidebar styles */
 
 #todolist-sidebar {
-    flex-basis: 50%;
+    flex-basis: 25%;
     padding: 25px;
 }
 
@@ -61,5 +61,6 @@
 
 #add-task-form {
     display: flex;
-    background-color: darkgreen;
+    width: max-content;
+    align-self: flex-end;
 }
