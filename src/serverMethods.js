@@ -38,13 +38,13 @@ export default {
     }).then(response => response.json());
   },
 
-  patchMethod: (task) => {
+  patchMethod: (taskId, state) => {
     let taskObject = [{
       "path": "Done",
       "op": "add",
-      "value": task.taskDone
+      "value": state
     }]
-    return fetch(patchTaskEndpoint + task.taskId, {
+    return fetch(patchTaskEndpoint + taskId, {
       method: 'PATCH',
       headers: {
         "Content-Type": "application/json-patch+json"

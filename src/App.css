@@ -2,6 +2,7 @@
     display: flex;
     margin-top: 100px;
     height: 80vh;
+    justify-content: center;
 }
 
 .nonvisible {
@@ -17,10 +18,9 @@
     color: red;
 }
 
-#tasks {
+#tasks, #today{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     flex-basis: 75%;
     margin-left: 10px;
 }
@@ -42,6 +42,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     margin-bottom: 10px;
+    flex-basis: fit-content;;
 }
 
 .task-status {
@@ -52,7 +53,7 @@
 /* Sidebar styles */
 
 #todolist-sidebar {
-    flex-basis: 25%;
+    flex-basis: 10%;
     padding: 25px;
 }
 
@@ -63,4 +64,10 @@
     display: flex;
     width: max-content;
     align-self: flex-end;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 75%;
 }

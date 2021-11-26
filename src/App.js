@@ -1,5 +1,4 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
 
 import TodoListSidebar from './Components/TodoListSidebar';
 import Tasks from './Components/Tasks/Tasks';

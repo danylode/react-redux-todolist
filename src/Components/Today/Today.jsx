@@ -9,17 +9,9 @@ export default function Today() {
         serverMethods.getTodayTasks().then((data) => setTasks(data));
     }, []);
 
-    let deleteTask = (taskId) => {
-        serverMethods.deleteMethod(taskId).then((data) => setTasks(data));
-    }
-
-    let patchDoneState = (task) => {
-        serverMethods.patchMethod(task).then((data) => setTasks(data));
-    }
-
     return (
-        <div id='content'>
-            {tasks.map((task) => <TodayTask key={task.taskId} task={task} nonVisible={false} deleteHandler={deleteTask} changeHandler={patchDoneState} />)}
+        <div id='today'>
+            {tasks.map((task) => <TodayTask key={task.taskId} task={task} nonVisible={false} />)}
         </div>
     )
 }
