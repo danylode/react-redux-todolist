@@ -9,13 +9,12 @@ const dashboardReducer = (dashboard = [], action) => {
     switch (action.type) {
         case dashboardActionsTypes.DASHBOARD_LOADED:
             return action.payload;
-        case taskActionsTypes.TASKS_ADD:
+        case taskActionsTypes.TASK_ADD:
             return incrementListCountById(dashboard, action.payload.taskListId, 1);
-        case taskActionsTypes.TASKS_DELETE:
+        case taskActionsTypes.TASK_DELETE:
             return incrementListCountById(dashboard, action.payload.taskListId, -1);
-        case taskActionsTypes.TASKS_REPLACE:
+        case taskActionsTypes.TASK_STATUS_UPDATED:
             let patchInfo = action.payload;
-            console.log(patchInfo.oldState - patchInfo.newState);
             return incrementListCountById(dashboard, patchInfo.listId, patchInfo.oldState - patchInfo.newState);
         default:
             return dashboard;

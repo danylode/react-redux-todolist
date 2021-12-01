@@ -1,8 +1,8 @@
-const TASKS_LOADED = 'tasks/loader';
-const TASKS_ADD = 'tasks/add';
-const TASKS_DELETE = 'tasks/delete';
-const TASKS_REPLACE = 'tasks/replace';
+const TASK_LOADED = 'tasks/loader';
+const TASK_ADD = 'tasks/add';
+const TASK_DELETE = 'tasks/delete';
+const TASK_STATUS_UPDATED = 'tasks/update';
 
 const TASKS_SET_VISIBLE = 'tasks/setVisible';
 
-export { TASKS_LOADED, TASKS_ADD, TASKS_DELETE, TASKS_REPLACE, TASKS_SET_VISIBLE }
+export { TASK_LOADED, TASK_ADD, TASK_DELETE, TASK_STATUS_UPDATED, TASKS_SET_VISIBLE }

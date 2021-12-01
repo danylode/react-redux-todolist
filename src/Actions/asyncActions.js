@@ -22,7 +22,7 @@ const loadTodayTasks = dispatch => {
 const loadTasks = listId => dispatch => {
     fetch(`https://localhost:5001/api/tasks?listId=${listId}&all=true`)
         .then(res => res.json())
-        .then(data => dispatch({ type: tasksActionsTypes.TASKS_LOADED, payload: data }));
+        .then(data => dispatch({ type: tasksActionsTypes.TASK_LOADED, payload: data }));
 }
 
 const postTask = (listId, task) => dispatch => {
@@ -34,7 +34,7 @@ const postTask = (listId, task) => dispatch => {
         body: JSON.stringify(task)
     })
         .then(response => response.json())
-        .then((data) => dispatch({ type: tasksActionsTypes.TASKS_ADD, payload: data }))
+        .then((data) => dispatch({ type: tasksActionsTypes.TASK_ADD, payload: data }))
 }
 
 const deleteTask = listId => dispatch => {
@@ -42,7 +42,7 @@ const deleteTask = listId => dispatch => {
         method: 'DELETE'
     })
         .then(response => response.json())
-        .then((data) => dispatch({ type: tasksActionsTypes.TASKS_DELETE, payload: data }))
+        .then((data) => dispatch({ type: tasksActionsTypes.TASK_DELETE, payload: data }))
 }
 
 const patchTask = (patchInfo) => dispatch => {
@@ -59,7 +59,7 @@ const patchTask = (patchInfo) => dispatch => {
         body: JSON.stringify(taskObject)
     })
         .then((response) => response.json())
-        .then(() => dispatch({ type: tasksActionsTypes.TASKS_REPLACE, payload: patchInfo }))
+        .then(() => dispatch({ type: tasksActionsTypes.TASK_STATUS_UPDATED, payload: patchInfo }))
 }
 
 export { loadDashboard, loadTasks, postTask, deleteTask, patchTask, loadTodayTasks }

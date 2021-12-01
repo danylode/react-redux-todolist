@@ -15,13 +15,13 @@ const deleteTask = (state, task) => {
 
 const taskListsReducer = (tasks = [], action) => {
     switch (action.type) {
-        case taskActionsTypes.TASKS_LOADED:
+        case taskActionsTypes.TASK_LOADED:
             return action.payload;
-        case taskActionsTypes.TASKS_ADD:
+        case taskActionsTypes.TASK_ADD:
             return addTask(tasks, action.payload);
-        case taskActionsTypes.TASKS_REPLACE:
+        case taskActionsTypes.TASK_STATUS_UPDATED:
             return patchTask(tasks, action.payload);
-        case taskActionsTypes.TASKS_DELETE:
+        case taskActionsTypes.TASK_DELETE:
             return deleteTask(tasks, action.payload);
         default:
             return tasks;
