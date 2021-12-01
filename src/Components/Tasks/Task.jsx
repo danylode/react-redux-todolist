@@ -9,8 +9,13 @@ export default function Task(props) {
     }
 
     let onDoneChange = (event) => {
-        task.taskDone = event.target.checked;
-        props.changeHandler(task.taskId, task.taskDone);
+        let patchInfo = {
+            listId: task.taskListId,
+            taskId: task.taskId,
+            oldState: task.taskDone,
+            newState: !task.taskDone
+        }
+        props.changeHandler(patchInfo);
     }
 
     return (

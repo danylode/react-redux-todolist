@@ -1,38 +1,39 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router';
 import Task from './Task';
-import serverMethods from '../../serverMethods';
 import CreateTaskForm from './CreateTaskForm';
+import { useDispatch, useSelector } from 'react-redux';
+import * as asyncActions from '../../Actions/asyncActions'
+import { tasksSetVisibility } from '../../Actions/actions'
 
 export default function Tasks() {
     let params = useParams();
-    let [tasks, setTasks] = useState([]);
-    let [all, setAll] = useState(false);
+
+    let dispatch = useDispatch();
+    let tasks = useSelector(state => state.tasks.currentTasks);
+    let showAll = useSelector(state => state.tasks.visible);
 
     let onChange = (event) => {
-        setAll(event.target.checked);
+        dispatch(tasksSetVisibility(event.target.checked))
     }
 
     let addTask = (listId, task) => {
-        serverMethods.postMethod(listId, task).then((data) => setTasks(data));
+        dispatch(asyncActions.postTask(listId, task));
     }
 
     let deleteTask = (taskId) => {
-        serverMethods.deleteMethod(taskId).then((data) => setTasks(data));
+        dispatch(asyncActions.deleteTask(taskId));
     }
 
-    let patchDoneState = (taskId, state) => {
-        serverMethods.patchMethod(taskId, state).then((data) => setTasks(data));
+    let patchDoneState = (task) => {
+        dispatch(asyncActions.patchTask(task));
     }
 
-    let filteredTasks = useMemo(() => {
-        return all ? tasks : tasks.filter((task) => !task.taskDone);
-    }, [tasks, all])
+    let filteredTasks = useMemo(() => showAll ? tasks : tasks.filter((task) => !task.taskDone), [tasks, showAll])
 
-    // First load
     useEffect(() => {
-        serverMethods.getTaskListById(params.id, all).then((data) => setTasks(data));
-    }, [params.id]);
+        dispatch(asyncActions.loadTasks(params.id));
+    }, [dispatch, params.id]);
 
     return (
         <div id="tasks">
@@ -41,7 +42,7 @@ export default function Tasks() {
                 <label>Show all</label>
             </div>
             {filteredTasks.map((task) => <Task key={task.taskId} task={task} deleteHandler={deleteTask} changeHandler={patchDoneState} />)}
-            <CreateTaskForm listId={params.id} onSubmit={addTask} />
+            <CreateTaskForm listId={params.id} addTask={addTask} />
         </div>
     )
 }

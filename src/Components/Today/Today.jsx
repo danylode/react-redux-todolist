@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import TodayTask from './TodayTask'
-import serverMethods from '../../serverMethods';
+import * as actions from '../../Actions/asyncActions'
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Today() {
-    let [tasks, setTasks] = useState([]);
+    let dispatch = useDispatch();
+    let todayTasks = useSelector(x => x.today);
 
     useEffect(() => {
-        serverMethods.getTodayTasks().then((data) => setTasks(data));
-    }, []);
+        dispatch(actions.loadTodayTasks);
+    }, [dispatch]);
 
     return (
         <div id='today'>
-            {tasks.map((task) => <TodayTask key={task.taskId} task={task} nonVisible={false} />)}
+            {todayTasks.map((task) => <TodayTask key={task.taskId} task={task} nonVisible={false} />)}
         </div>
     )
 }

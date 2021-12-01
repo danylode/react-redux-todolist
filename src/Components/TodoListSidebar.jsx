@@ -1,27 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import List from './List';
-import serverMethods from '../serverMethods';
 import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadDashboard } from '../Actions/asyncActions'
 
 export default function TodoListSidebar() {
-    let [lists, setLists] = useState([]);
-    const setActive = (event) =>  (event.isActive ? " date-red": "");
+    const setActive = (event) => (event.isActive ? " date-red" : "");
+
+    let dispatch = useDispatch();
+    let lists = useSelector(x => x.dashboard);
 
     useEffect(() => {
-        serverMethods.getDashboard().then((data) => setLists(data));
-    }, [])
+        dispatch(loadDashboard);
+    }, [dispatch])
 
     return (
-        <div id="todolist-sidebar">
+        <aside id="todolist-sidebar">
             <nav id="links">
                 <NavLink className={setActive} to="today">Today</NavLink>
             </nav>
             <li>
                 {
-                    lists.map((list) => <List key={list.listId} list={list}/>)
+                    lists.map((list) => <List key={list.listId} list={list} />)
                 }
             </li>
-        </div>
+        </aside>
     )
 }

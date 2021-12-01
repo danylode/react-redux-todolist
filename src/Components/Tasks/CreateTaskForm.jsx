@@ -11,8 +11,7 @@ export default function CreateTaskForm(props) {
             description: event.target[1].value,
             dueDate: event.target[2].value
         }
-        console.log(newTask);
-        props.onSubmit(currentList, newTask);
+        props.addTask(currentList, newTask);
     }
 
     return (
